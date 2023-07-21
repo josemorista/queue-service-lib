@@ -1,3 +1,3 @@
-# Storage Service lib
+# Queue Service lib
 
-Reusable storage service with support to s3 and disk storage engines
+Reusable queue services with support to RabbitMQ and SQS
