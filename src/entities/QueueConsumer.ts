@@ -1,11 +1,11 @@
-type HandleMessageFn<MessageType> = (message: MessageType) => Promise<void>;
+type HandleMessageFn = (message: unknown) => Promise<void>;
 interface QueueConsumerOptions {
   requeueOnError: boolean;
 }
 
-export abstract class QueueConsumer<MessageType> {
+export abstract class QueueConsumer {
   protected queue: string;
-  protected handler: HandleMessageFn<MessageType>;
+  protected handler: HandleMessageFn;
   protected options: QueueConsumerOptions;
 
   constructor({
@@ -16,7 +16,7 @@ export abstract class QueueConsumer<MessageType> {
     },
   }: {
     queue: string;
-    handler: HandleMessageFn<MessageType>;
+    handler: HandleMessageFn;
     options?: QueueConsumerOptions;
   }) {
     this.handler = handler;

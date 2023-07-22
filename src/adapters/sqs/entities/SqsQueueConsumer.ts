@@ -10,12 +10,12 @@ interface SQSQueueConsumerOptions extends SQSClientConfig {
 
 type MessageMetadata = { Id: string; ReceiptHandle: string };
 
-export class SQSQueueConsumer<MessageType> extends QueueConsumer<MessageType> {
+export class SQSQueueConsumer extends QueueConsumer {
   private sqs: SQS;
   private isConsuming: boolean;
 
   constructor(
-    consumerOptions: ConstructorParameters<typeof QueueConsumer<MessageType>>[0],
+    consumerOptions: ConstructorParameters<typeof QueueConsumer>[0],
     private sqsConfig: SQSQueueConsumerOptions
   ) {
     super(consumerOptions);

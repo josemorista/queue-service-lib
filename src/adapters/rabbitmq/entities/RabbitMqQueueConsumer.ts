@@ -2,11 +2,11 @@ import { ConsumeMessage } from 'amqplib';
 import { QueueConsumer } from '../../../entities/QueueConsumer';
 import { RabbitMqQueueService } from './RabbitMqQueueService';
 
-export class RabbitMqQueueConsumer<MessageType> extends QueueConsumer<MessageType> {
+export class RabbitMqQueueConsumer extends QueueConsumer {
   private rabbit: RabbitMqQueueService;
 
   constructor(
-    options: ConstructorParameters<typeof QueueConsumer<MessageType>>[0],
+    options: ConstructorParameters<typeof QueueConsumer>[0],
     rabbitConfig: ConstructorParameters<typeof RabbitMqQueueService>[0]
   ) {
     super(options);
