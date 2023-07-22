@@ -1,4 +1,4 @@
-type HandleMessageFn = (message: unknown) => Promise<void>;
+type HandleMessageFn = (message: any) => Promise<void>;
 interface QueueConsumerOptions {
   requeueOnError: boolean;
 }
