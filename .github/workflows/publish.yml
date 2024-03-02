@@ -1,0 +1,19 @@
+name: 'publish'
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: 'publish'
+        run: |
+          npm config set "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" --userconfig .npmrc
+          npm publish

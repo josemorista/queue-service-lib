@@ -80,12 +80,14 @@ export class SQSQueueConsumer extends QueueConsumer {
           })
         );
 
-        await this.sqs.deleteMessageBatch({
-          Entries: ackCandidates,
-          QueueUrl: this.queue,
-        });
+        if(ackCandidates.length) {
+          await this.sqs.deleteMessageBatch({
+            Entries: ackCandidates,
+            QueueUrl: this.queue,
+          });
+        }
 
-        if (this.options.requeueOnError) {
+        if (this.options.requeueOnError && requeueCandidates.length) {
           await this.sqs.changeMessageVisibilityBatch({
             QueueUrl: this.queue,
             Entries: requeueCandidates,

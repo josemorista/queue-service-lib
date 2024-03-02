@@ -1,0 +1,33 @@
+name: 'create-release'
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        required: true
+        type: 'choice'
+        options:
+          - 'patch'
+          - 'minor'
+          - 'major'
+
+jobs:
+  create-release:
+    runs-on: 'ubuntu-latest'
+    name: 'Bump & push'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      - name: Set Git config
+        run: |
+          git config user.name jm-bot
+          git config user.email josemorista@id.uff.br
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: 'Bump version'
+        run: |
+          npm version ${{github.event.inputs.bump}}
+          git push 
+          git push --tags
