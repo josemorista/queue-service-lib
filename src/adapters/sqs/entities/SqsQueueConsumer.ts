@@ -80,7 +80,7 @@ export class SQSQueueConsumer extends QueueConsumer {
           })
         );
 
-        if(ackCandidates.length) {
+        if (ackCandidates.length) {
           await this.sqs.deleteMessageBatch({
             Entries: ackCandidates,
             QueueUrl: this.queue,
